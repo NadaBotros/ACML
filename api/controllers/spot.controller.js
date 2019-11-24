@@ -1,6 +1,26 @@
 const Spot = require('../../models/Spots')
 const spotValidator = require('../helpers/validations/spot.validation')
 
+//As a user I should be able to get all the spots in the parking space
+exports.allSpots = async function(req, res) {
+  try {
+    const spots = await Spot.find()
+    res.json({ data: spots })
+  } catch (error) {
+    console.log('error')
+  }
+}
+
+//As a user I should be able to get all the empty spots in the parking space
+exports.emptySpots = async function(req, res) {
+  try {
+    const spots = await Spot.find({ occupied: false })
+    res.json({ data: spots })
+  } catch (error) {
+    console.log('error')
+  }
+}
+
 // As a user I should be able to update that a certian parking space is occupied/unoccupied
 exports.updateSpot = async function(req, res) {
   try {
