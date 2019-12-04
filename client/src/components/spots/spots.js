@@ -33,11 +33,11 @@ export class spots extends Component {
     checkedA: true
   }
 
-  // componentDidMount() {
-  //   fetch('/api/spots/allSpots').then(res => {
-  //     console.log(res)
-  //   })
-  // }
+  componentDidMount() {
+    fetch('/api/spots/allSpots').then(async res => {
+      console.log(await res.json())
+    })
+  }
 
   handleChange = panel => (event, expanded) => {
     this.setState({
