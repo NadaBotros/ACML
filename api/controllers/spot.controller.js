@@ -21,6 +21,17 @@ exports.emptySpots = async function(req, res) {
 	}
 }
 
+//Filter spots according to which parking lot they are in
+exports.parkingLot = async function(req, res) {
+	try {
+		const parkingLot = req.body.parkingLot
+		const spots = await Spot.find({ parkingLot: parkingLot })
+		res.json({ data: spots })
+	} catch (error) {
+		console.log('error')
+	}
+}
+
 // As a user I should be able to update that a certian parking space is occupied/unoccupied
 exports.updateSpot = async function(req, res) {
 	try {
