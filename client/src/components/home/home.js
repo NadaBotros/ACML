@@ -80,7 +80,6 @@ export class home extends Component {
 								<h1>Welcome to GUC parking spots</h1>
 								<p>Reserve your parking spot</p>
 								<a
-									id='P1'
 									href='/spots'
 									class='hero-cta'
 									onClick={localStorage.setItem('parking', 1)}
@@ -88,34 +87,30 @@ export class home extends Component {
 									P1
 								</a>
 								<a
-									id='P5'
 									href='/spots'
 									class='hero-cta'
-									onClick={localStorage.setItem('parking', 5)}
+									onClick={localStorage.setItem('parking', 1)}
 								>
 									P5
 								</a>
 								<a
-									id='P6'
 									href='/spots'
 									class='hero-cta'
-									onClick={localStorage.setItem('parking', 6)}
+									onClick={localStorage.setItem('parking', 1)}
 								>
 									P6
 								</a>
 								<a
-									id='P7'
 									href='/spots'
 									class='hero-cta'
-									onClick={localStorage.setItem('parking', 7)}
+									onClick={localStorage.setItem('parking', 1)}
 								>
 									P7
 								</a>
 								<a
-									id='P8'
 									href='/spots'
 									class='hero-cta'
-									onClick={localStorage.setItem('parking', 8)}
+									onClick={localStorage.setItem('parking', 1)}
 								>
 									P8
 								</a>
