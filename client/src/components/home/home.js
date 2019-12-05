@@ -79,19 +79,44 @@ export class home extends Component {
 							<div class='hero-content'>
 								<h1>Welcome to GUC parking spots</h1>
 								<p>Reserve your parking spot</p>
-								<a href='/spots' class='hero-cta'>
+								<a
+									id='P1'
+									href='/spots'
+									class='hero-cta'
+									onClick={localStorage.setItem('parking', 1)}
+								>
 									P1
 								</a>
-								<a href='/spots' class='hero-cta'>
+								<a
+									id='P5'
+									href='/spots'
+									class='hero-cta'
+									onClick={localStorage.setItem('parking', 5)}
+								>
 									P5
 								</a>
-								<a href='/spots' class='hero-cta'>
+								<a
+									id='P6'
+									href='/spots'
+									class='hero-cta'
+									onClick={localStorage.setItem('parking', 6)}
+								>
 									P6
 								</a>
-								<a href='/spots' class='hero-cta'>
+								<a
+									id='P7'
+									href='/spots'
+									class='hero-cta'
+									onClick={localStorage.setItem('parking', 7)}
+								>
 									P7
 								</a>
-								<a href='/spots' class='hero-cta'>
+								<a
+									id='P8'
+									href='/spots'
+									class='hero-cta'
+									onClick={localStorage.setItem('parking', 8)}
+								>
 									P8
 								</a>
 							</div>

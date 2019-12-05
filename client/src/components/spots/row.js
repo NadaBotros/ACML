@@ -10,7 +10,6 @@ import axios from 'axios'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
-import Row from './row.js'
 const count = 1
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -27,26 +26,13 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-export class spots extends Component {
+export class Row extends Component {
 	state = {
 		expanded: null,
 		longitude: '',
 		latitude: '',
-		occupied: true,
 		checkedA: true,
 		object: []
-	}
-
-	componentDidMount() {
-		axios
-			.post('http://localhost:5000/api/spots/parkingLot', {
-				parkingLot: localStorage.getItem('parking')
-			})
-			.then(res => {
-				this.setState({
-					object: res.data.data
-				})
-			})
 	}
 
 	handleChange = panel => (event, expanded) => {
@@ -60,33 +46,29 @@ export class spots extends Component {
 	}
 
 	render() {
-		console.log(localStorage.getItem('parking'))
 		const { classes } = this.props
 		const { expanded } = this.state
 
 		return (
 			<div>
-				<FormGroup row>
-					<FormControlLabel
-						control={
-							<Switch
-								checked={this.state.checkedB}
-								onChange={this.handleChange2('checkedB')}
-								value='checkedB'
-								color='primary'
-							/>
-						}
-						label='Empty spaces'
-					/>
-				</FormGroup>
-				<div className={classes.root}>
-					{this.state.object.map(element => (
-						<Row></Row>
-					))}
-				</div>
+				<ExpansionPanel
+					expanded={expanded === 'panel'}
+					onChange={this.handleChange('panel')}
+				>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls='panel1bh-content'
+						id='panelbh-header'
+					>
+						<Typography className={classes.heading}>Spot</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Typography>Occupied:{this.state.object.occupied}</Typography>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
 			</div>
 		)
 	}
 }
 
-export default withStyles(useStyles)(spots)
+export default withStyles(useStyles)(Row)
