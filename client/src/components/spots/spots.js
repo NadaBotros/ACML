@@ -11,82 +11,161 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Row from './row.js'
+import Row2 from './row2.js'
+import background from '../../components/pictures/background.jpg'
+import './spots.css'
 const count = 1
 const useStyles = makeStyles(theme => ({
-	root: {
-		width: '100%'
-	},
-	heading: {
-		fontSize: theme.typography.pxToRem(15),
-		flexBasis: '33.33%',
-		flexShrink: 0
-	},
-	secondaryHeading: {
-		fontSize: theme.typography.pxToRem(15),
-		color: theme.palette.text.secondary
-	}
+  root: {
+    width: '100%'
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary
+  }
 }))
 
 export class spots extends Component {
-	state = {
-		expanded: null,
-		longitude: '',
-		latitude: '',
-		occupied: true,
-		checkedA: true,
-		object: []
-	}
+  state = {
+    expanded: null,
+    longitude: '',
+    latitude: '',
+    occupied: true,
+    checkedA: false,
+    object: [],
+    emptySpots: [],
+    allSpots: [],
+    allAndEmptySpots: [],
+    update: false,
+    id: ''
+  }
 
-	componentDidMount() {
-		axios
-			.post('http://localhost:5000/api/spots/parkingLot', {
-				parkingLot: localStorage.getItem('parking')
-			})
-			.then(res => {
-				this.setState({
-					object: res.data.data
-				})
-			})
-	}
+  componentDidMount() {
+    axios
+      .post('http://localhost:5000/api/spots/lotAllAndEmptySpots', {
+        parkingLot: localStorage.getItem('parking')
+      })
+      .then(res => {
+        console.log('*** ' + res.data.emptySpots)
 
-	handleChange = panel => (event, expanded) => {
-		this.setState({
-			expanded: expanded ? panel : false
-		})
-	}
+        this.setState({
+          emptySpots: res.data.emptySpots,
+          allSpots: res.data.allSpots
+          //   allAndEmptySpots: res.data
+        })
+      })
+  }
 
-	handleChange2 = name => event => {
-		this.setState({ [name]: event.target.checked })
-	}
+  handleChange = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false
+    })
+  }
 
-	render() {
-		console.log(localStorage.getItem('parking'))
-		const { classes } = this.props
-		const { expanded } = this.state
+  handleChange2 = name => event => {
+    this.setState({ ...this.state, [name]: event.target.checked })
+  }
 
-		return (
-			<div>
-				<FormGroup row>
-					<FormControlLabel
-						control={
-							<Switch
-								checked={this.state.checkedB}
-								onChange={this.handleChange2('checkedB')}
-								value='checkedB'
-								color='primary'
-							/>
-						}
-						label='Empty spaces'
-					/>
-				</FormGroup>
-				<div className={classes.root}>
-					{this.state.object.map(element => (
-						<Row></Row>
-					))}
-				</div>
-			</div>
-		)
-	}
+  updateOccuipied = (id, occupied) => {
+    axios
+      .post('http://localhost:5000/api/spots/updateSpot', {
+        id: id,
+        occupied: occupied
+      })
+      .then(async res => {
+        const update = await axios.post(
+          'http://localhost:5000/api/spots/parkingLot',
+          {
+            parkingLot: localStorage.getItem('parking')
+          }
+        )
+        const slot = update.data.data
+        this.setState({
+          allSpots: [],
+          emptySpots: []
+        })
+        this.setState({
+          allSpots: slot,
+          update: true
+        })
+      })
+  }
+
+  render() {
+    const { classes } = this.props
+    const { expanded } = this.state
+    console.log('All : ' + this.state.allSpots)
+    console.log('Empty : ' + this.state.emptySpots)
+
+    if (this.state.checkedA == true) {
+      console.log('Checked True')
+      return (
+        <div className="hero-content">
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={this.state.checked}
+                  onChange={this.handleChange2('checkedA')}
+                  value="checkedA"
+                  color="primary"
+                />
+              }
+              label="Empty spaces"
+            />
+          </FormGroup>
+          <div className={classes.root}>
+            {console.log('')}
+            {this.state.emptySpots.map(element => (
+              <Row2
+                element={element}
+                id={element._id}
+                updateOccuipied={this.updateOccuipied}
+                componentDidMount={this.componentDidMount}
+                checkedA={this.state.checkedA}
+              ></Row2>
+            ))}
+          </div>
+        </div>
+      )
+    } else if (this.state.checkedA == false) {
+      console.log('Checked Flase')
+
+      return (
+        <div className="hero-content">
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={this.state.checked}
+                  onChange={this.handleChange2('checkedA')}
+                  value="checkedA"
+                  color="primary"
+                />
+              }
+              label="Empty spaces"
+            />
+          </FormGroup>
+          <div className={classes.root}>
+            {this.state.allSpots.map(element => (
+              <Row2
+                element={element}
+                id={element._id}
+                updateOccuipied={this.updateOccuipied}
+                componentDidMount={this.componentDidMount}
+                checkedA={this.state.checkedA}
+              ></Row2>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  }
 }
 
 export default withStyles(useStyles)(spots)

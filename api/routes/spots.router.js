@@ -7,5 +7,9 @@ router.post('/parkingLot', spotController.parkingLot)
 router.post('/createSpot', spotController.addSpot)
 router.post('/updateSpot', spotController.updateSpot)
 router.post('/deleteSpot', spotController.deleteSpot)
+router.post('/lotEmpty', spotController.parkingLotEmpty)
+router.post('/lotAllAndEmptySpots', spotController.parkingLotEmptyAndAll)
+
+// router.post('/toggleSpot', spotController.toggleSpot)
 
 module.exports = router

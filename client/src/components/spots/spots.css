@@ -1,26 +1,13 @@
-/* Style the button that is used to open and close the collapsible content */
-.collapsible {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 50%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
+body {
+  background-image: url('../../components/pictures/parkingspots.jpg');
+  /* background-color: rgba(10, 40, 60, 0.7); */
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active,
-.collapsible:hover {
-  background-color: #ccc;
+  opacity: unset;
 }
-
-/* Style the collapsible content. Note: hidden by default */
-.content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
+#HeroBanner .hero-content {
+  display: table-cell;
+  background-color: rgba(10, 40, 60, 0.7);
+  text-align: center;
+  vertical-align: middle;
+  padding: 0 15px;
 }
