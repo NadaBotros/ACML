@@ -13,7 +13,7 @@ ReactDOM.render(
 		<Switch>
 			<Route exact path='/' component={home} />
 			<Route exact path='/spots' component={spots} />
-			<Route exact path='/maps' component={maps} />
+			<Route exact path='/spots/maps' component={maps} />
 		</Switch>
 	</Router>,
 

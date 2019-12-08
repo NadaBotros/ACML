@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import './home.css'
-import Button from 'react-bootstrap/Button'
+import { Button } from '@material-ui/core'
 
 export class home extends Component {
+	//   handleClick(e) {
+	//     console.log(+'ID : ' + e.target.id)
+	//   }
+
 	render() {
 		return (
 			<div>
@@ -13,23 +17,23 @@ export class home extends Component {
 				>
 					<section id='MainContainer'>
 						<header id='Header'>
-							<nav class='main-navigation'>
-								<div class='container clearfix'>
-									<div class='container clearfix'>
-										<div class='site-logo-wrap'>
-											<a class='logo' href='#'></a>
+							<nav className='main-navigation'>
+								<div className='container clearfix'>
+									<div className='container clearfix'>
+										<div className='site-logo-wrap'>
+											<a className='logo' href='#'></a>
 										</div>
 										<a
 											href='javascript:void(0)'
-											class='menu-trigger hidden-lg-up'
+											className='menu-trigger hidden-lg-up'
 										>
 											<span>&nbsp;</span>
 										</a>
-										<div class='main-menu hidden-md-down'>
-											<ul class='menu-list'>
+										<div className='main-menu hidden-md-down'>
+											<ul className='menu-list'>
 												<li>
 													<a
-														class='nav-link'
+														className='nav-link'
 														href='javascript:void(0)'
 														data-target='#HeroBanner'
 													>
@@ -39,7 +43,7 @@ export class home extends Component {
 
 												<li>
 													<a
-														class='nav-link'
+														className='nav-link'
 														href='javascript:void(0)'
 														data-target='#ContactUs'
 													>
@@ -50,11 +54,11 @@ export class home extends Component {
 										</div>
 									</div>
 
-									<div class='mobile-menu hidden-lg-up'>
-										<ul class='mobile-menu-list'>
+									<div className='mobile-menu hidden-lg-up'>
+										<ul className='mobile-menu-list'>
 											<li>
 												<a
-													class='nav-link'
+													className='nav-link'
 													href='javascript:void(0)'
 													data-target='#HeroBanner'
 												>
@@ -64,7 +68,7 @@ export class home extends Component {
 
 											<li>
 												<a
-													class='nav-link'
+													className='nav-link'
 													href='javascript:void(0)'
 													data-target='#ContactUs'
 												>
@@ -77,31 +81,35 @@ export class home extends Component {
 							</nav>
 						</header>
 						<section id='HeroBanner'>
-							<div class='hero-content'>
+							<div className='hero-content'>
 								<h1>Welcome to GUC parking spots</h1>
 								<p>Reserve your parking spot</p>
 								<a
+									id='P1'
 									href='/spots'
-									class='hero-cta'
+									className='hero-cta'
 									onClick={localStorage.setItem('parking', 1)}
 								>
 									P1
 								</a>
 								<a
+									id='P5'
 									href='/spots'
-									class='hero-cta'
+									className='hero-cta'
 									onClick={localStorage.setItem('parking', 5)}
 								>
 									P5
 								</a>
 								<a
+									id='P6'
 									href='/spots'
-									class='hero-cta'
+									className='hero-cta'
 									onClick={localStorage.setItem('parking', 6)}
 								>
 									P6
 								</a>
 								<a
+									id='p7'
 									href='/spots'
 									class='hero-cta'
 									onClick={localStorage.setItem('parking', 7)}
@@ -109,7 +117,8 @@ export class home extends Component {
 									P7
 								</a>
 								<a
-									href='/maps'
+									id='p8'
+									href='/spots'
 									class='hero-cta'
 									onClick={localStorage.setItem('parking', 8)}
 								>
