@@ -62,10 +62,10 @@ export class Row extends Component {
 						>
 							Reserve slot
 						</Button>
-
-						<Link to='/maps' className='btn btn-primary'>
+						<Button onClick={event => (window.location.href = '/spots/maps')}>
+							{' '}
 							Directions
-						</Link>
+						</Button>
 					</Paper>
 					<br></br>
 				</div>
@@ -97,7 +97,10 @@ export class Row extends Component {
 							Unrserve slot
 						</Button>
 
-						<Button> Directions</Button>
+						<Button onClick={event => (window.location.href = '/spots/maps')}>
+							{' '}
+							Directions
+						</Button>
 					</Paper>
 					<br></br>
 				</div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './home.css'
-import { Button } from '@material-ui/core'
 
 export class home extends Component {
 	//   handleClick(e) {

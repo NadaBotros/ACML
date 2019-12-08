@@ -113,6 +113,7 @@ export class Row extends Component {
 							</Button>
 
 							<Button onClick={event => (window.location.href = '/spots/maps')}>
+								{' '}
 								Directions
 							</Button>
 						</ExpansionPanelDetails>
@@ -165,9 +166,10 @@ export class Row extends Component {
 								Unreserve slot
 							</Button>
 
-							<Link to='/maps' className='btn btn-primary'>
+							<Button onClick={event => (window.location.href = '/spots/maps')}>
+								{' '}
 								Directions
-							</Link>
+							</Button>
 						</ExpansionPanelDetails>
 					</ExpansionPanel>
 				</div>
