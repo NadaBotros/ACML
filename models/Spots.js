@@ -18,6 +18,10 @@ const spotsSchema = new Schema({
 	parkingLot: {
 		type: Number,
 		required: true
+	},
+	name: {
+		type: String,
+		required: true
 	}
 })
 

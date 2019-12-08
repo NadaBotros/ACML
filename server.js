@@ -27,10 +27,10 @@ mongoose
 		useNewUrlParser: true
 	})
 	.then(() => console.log('MongoDB Connected...'))
-	// .then(() => mongoose.connection.db.dropDatabase())
-	// .then(() => console.log('Database Dropped'))
-	// .then(() => populate())
-	// .then(() => console.log('Populated DB'))
+	.then(() => mongoose.connection.db.dropDatabase())
+	.then(() => console.log('Database Dropped'))
+	.then(() => populate())
+	.then(() => console.log('Populated DB'))
 	.catch(err => console.log(err))
 
 // Direct to Route Handlers

@@ -6,16 +6,18 @@ import spots from './components/spots/spots'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import * as serviceWorker from './serviceWorker'
+import maps from './components/maps/maps'
 
 ReactDOM.render(
-  <Router>
-    <Switch>
-      <Route exact path="/" component={home} />
-      <Route exact path="/spots" component={spots} />
-    </Switch>
-  </Router>,
+	<Router>
+		<Switch>
+			<Route exact path='/' component={home} />
+			<Route exact path='/spots' component={spots} />
+			<Route exact path='/maps' component={maps} />
+		</Switch>
+	</Router>,
 
-  document.getElementById('root')
+	document.getElementById('root')
 )
 
 serviceWorker.unregister()

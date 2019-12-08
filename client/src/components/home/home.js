@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './home.css'
+import Button from 'react-bootstrap/Button'
 
 export class home extends Component {
 	render() {
@@ -89,28 +90,28 @@ export class home extends Component {
 								<a
 									href='/spots'
 									class='hero-cta'
-									onClick={localStorage.setItem('parking', 1)}
+									onClick={localStorage.setItem('parking', 5)}
 								>
 									P5
 								</a>
 								<a
 									href='/spots'
 									class='hero-cta'
-									onClick={localStorage.setItem('parking', 1)}
+									onClick={localStorage.setItem('parking', 6)}
 								>
 									P6
 								</a>
 								<a
 									href='/spots'
 									class='hero-cta'
-									onClick={localStorage.setItem('parking', 1)}
+									onClick={localStorage.setItem('parking', 7)}
 								>
 									P7
 								</a>
 								<a
-									href='/spots'
+									href='/maps'
 									class='hero-cta'
-									onClick={localStorage.setItem('parking', 1)}
+									onClick={localStorage.setItem('parking', 8)}
 								>
 									P8
 								</a>
