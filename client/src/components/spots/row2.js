@@ -41,7 +41,7 @@ export class Row extends Component {
         <div className="outerDiv">
           <Paper className={classes.root} style={styleCard}>
             <Typography variant="h5" component="h3" style={styleRowReserved}>
-              Spot
+              {this.props.element.name}
             </Typography>
             <Typography component="p">
               {/* Spot occupied:{' '}
@@ -73,7 +73,7 @@ export class Row extends Component {
         <div className="outerDiv">
           <Paper className={classes.root}>
             <Typography variant="h5" component="h3" style={styleRowUnReserved}>
-              Spot
+              {this.props.element.name}
             </Typography>
             <Typography component="p">
               {/* Spot occupied:{' '}

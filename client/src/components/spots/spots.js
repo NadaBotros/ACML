@@ -14,6 +14,10 @@ import Row from './row.js'
 import Row2 from './row2.js'
 import background from '../../components/pictures/background.jpg'
 import './spots.css'
+import { display } from '@material-ui/system'
+import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core'
+
 const count = 1
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,7 +51,7 @@ export class spots extends Component {
 
   componentDidMount() {
     axios
-      .post('http://localhost:5000/api/spots/lotAllAndEmptySpots', {
+      .post('/api/spots/lotAllAndEmptySpots', {
         parkingLot: localStorage.getItem('parking')
       })
       .then(res => {
@@ -73,17 +77,14 @@ export class spots extends Component {
 
   updateOccuipied = (id, occupied) => {
     axios
-      .post('http://localhost:5000/api/spots/updateSpot', {
+      .post('/api/spots/updateSpot', {
         id: id,
         occupied: occupied
       })
       .then(async res => {
-        const update = await axios.post(
-          'http://localhost:5000/api/spots/lotAllAndEmptySpots',
-          {
-            parkingLot: localStorage.getItem('parking')
-          }
-        )
+        const update = await axios.post('/api/spots/lotAllAndEmptySpots', {
+          parkingLot: localStorage.getItem('parking')
+        })
         const s = update.data.allSpots
         const ss = update.data.emptySpots
 
@@ -121,6 +122,10 @@ export class spots extends Component {
               }
               label="Empty spaces"
             />
+            <Button className="btnstyle">
+              {' '}
+              <Link to="/">Home</Link>
+            </Button>
           </FormGroup>
           <div className={classes.root}>
             {console.log('')}
@@ -153,6 +158,10 @@ export class spots extends Component {
               }
               label="Empty spaces"
             />
+            <Button className="btnstyle">
+              {' '}
+              <Link to="/">Home</Link>
+            </Button>
           </FormGroup>
           <div className={classes.root}>
             {this.state.allSpots.map(element => (

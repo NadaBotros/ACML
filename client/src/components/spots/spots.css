@@ -1,6 +1,6 @@
 body {
   background-image: url('../../components/pictures/parkingspots.jpg');
-  background-size: inherit;
+  background-size: inherity;
   /* background-color: rgba(10, 40, 60, 0.7); */
 
   opacity: unset;
@@ -11,4 +11,16 @@ body {
   text-align: center;
   vertical-align: middle;
   padding: 0 15px;
+}
+.btnstyle {
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 2cm;
+  margin-bottom: 1cm;
+  margin-top: 1cm;
 }

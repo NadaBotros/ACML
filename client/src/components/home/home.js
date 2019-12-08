@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './home.css'
 import { Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 export class home extends Component {
   //   handleClick(e) {
@@ -40,16 +41,6 @@ export class home extends Component {
                             Home
                           </a>
                         </li>
-
-                        <li>
-                          <a
-                            className="nav-link"
-                            href="javascript:void(0)"
-                            data-target="#ContactUs"
-                          >
-                            Contact
-                          </a>
-                        </li>
                       </ul>
                     </div>
                   </div>
@@ -65,16 +56,6 @@ export class home extends Component {
                           Home
                         </a>
                       </li>
-
-                      <li>
-                        <a
-                          className="nav-link"
-                          href="javascript:void(0)"
-                          data-target="#ContactUs"
-                        >
-                          Contact
-                        </a>
-                      </li>
                     </ul>
                   </div>
                 </div>
@@ -84,46 +65,46 @@ export class home extends Component {
               <div className="hero-content">
                 <h1>Welcome to GUC parking spots</h1>
                 <p>Reserve your parking spot</p>
-                <a
+                <Link
                   id="P1"
-                  href="/spots"
+                  to="/spots"
                   className="hero-cta"
                   onClick={localStorage.setItem('parking', 1)}
                 >
                   P1
-                </a>
-                <a
+                </Link>
+                <Link
                   id="P5"
-                  href="/spots"
+                  to="/spots"
                   className="hero-cta"
                   onClick={localStorage.setItem('parking', 5)}
                 >
                   P5
-                </a>
-                <a
+                </Link>
+                <Link
                   id="P6"
-                  href="/spots"
+                  to="/spots"
                   className="hero-cta"
                   onClick={localStorage.setItem('parking', 6)}
                 >
                   P6
-                </a>
-                <a
+                </Link>
+                <Link
                   id="p7"
-                  href="/spots"
+                  to="/spots"
                   class="hero-cta"
                   onClick={localStorage.setItem('parking', 7)}
                 >
                   P7
-                </a>
-                <a
+                </Link>
+                <Link
                   id="p8"
-                  href="/spots"
+                  to="/spots"
                   class="hero-cta"
                   onClick={localStorage.setItem('parking', 8)}
                 >
                   P8
-                </a>
+                </Link>
               </div>
             </section>
           </section>

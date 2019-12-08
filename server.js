@@ -4,7 +4,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const mongoURI = require('./config/keysDev').mongoURI
 const populate = require('./populationScript').populate
-
+var path = require('path')
 //Importing Middleware
 const loggerMiddleware = require('./api/middleware/logger')
 
