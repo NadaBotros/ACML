@@ -79,18 +79,21 @@ export class spots extends Component {
       })
       .then(async res => {
         const update = await axios.post(
-          'http://localhost:5000/api/spots/parkingLot',
+          'http://localhost:5000/api/spots/lotAllAndEmptySpots',
           {
             parkingLot: localStorage.getItem('parking')
           }
         )
-        const slot = update.data.data
+        const s = update.data.allSpots
+        const ss = update.data.emptySpots
+
         this.setState({
           allSpots: [],
           emptySpots: []
         })
         this.setState({
-          allSpots: slot,
+          allSpots: s,
+          emptySpots: ss,
           update: true
         })
       })
