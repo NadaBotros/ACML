@@ -6,6 +6,8 @@ import {
 	InfoWindow,
 	DirectionsRenderer
 } from 'google-maps-react'
+import { Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 const mapStyles = {
 	height: '100%',
@@ -21,6 +23,8 @@ const iconBase =
 export class MapContainer extends Component {
 	constructor(props) {
 		super(props)
+		const longitude = this.props.match.params.long
+		const latitude = this.props.match.params.lat
 		this.state = {
 			directionsService: new window.google.maps.DirectionsService(),
 			directions: null,
@@ -57,6 +61,12 @@ export class MapContainer extends Component {
 					content: 'P5',
 					//animation: google.maps.Animation.DROP,
 					icon: iconBase + 'parking_lot_maps.png'
+				},
+				{
+					coords: { lat: longitude, lng: latitude },
+					content: 'Spot'
+					//animation: google.maps.Animation.DROP,
+					// icon: iconBase + 'parking_lot_maps.png'
 				}
 			]
 		}
@@ -95,50 +105,6 @@ export class MapContainer extends Component {
 			})
 		}
 	}
-
-	displayMarkers = () => {
-		return this.state.markers.map((store, index) => {
-			return (
-				<div>
-					<Marker
-						key={index}
-						id={index}
-						position={{
-							lat: store.coords.lat,
-							lng: store.coords.lng
-						}}
-						showingInfoWindow={true}
-						icon={store.icon}
-						onClick={this.onMarkerClick}
-						name={store.content}
-					/>
-					<InfoWindow
-						marker={this.state.activeMarker}
-						visible={this.state.showingInfoWindow}
-						onClose={this.onClose}
-					>
-						<div>
-							<h4>{this.state.selectedPlace.name}</h4>
-						</div>
-					</InfoWindow>
-					<DirectionsRenderer
-						directions={this.state.directions}
-						options={{
-							polylineOptions: {
-								storkeColor: this.props.storkeColor,
-								strokeOpacity: 0.4,
-								strokeWeight: 4
-							},
-							preserveViewport: true,
-							suppressMarkers: true,
-							icon: { scale: 3 }
-						}}
-					/>
-				</div>
-			)
-		})
-	}
-
 	render() {
 		return (
 			<Map
@@ -249,6 +215,27 @@ export class MapContainer extends Component {
 					icon={this.state.markers[4].icon}
 					onClick={this.onMarkerClick}
 					name={this.state.markers[4].content}
+				/>
+				<InfoWindow
+					marker={this.state.activeMarker}
+					visible={this.state.showingInfoWindow}
+					onClose={this.onClose}
+				>
+					<div>
+						<h4>{this.state.selectedPlace.name}</h4>
+					</div>
+				</InfoWindow>
+				<Marker
+					key={6}
+					id={6}
+					position={{
+						lat: this.state.markers[5].coords.lat,
+						lng: this.state.markers[5].coords.lng
+					}}
+					showingInfoWindow={true}
+					//icon={this.state.markers[5].icon}
+					onClick={this.onMarkerClick}
+					name={this.state.markers[5].content}
 				/>
 				<InfoWindow
 					marker={this.state.activeMarker}
