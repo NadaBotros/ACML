@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
 
 import { Button } from '@material-ui/core'
 import './row.css'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import maps from '../maps/maps.js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -60,10 +62,24 @@ export class Row extends Component {
                 )
               }
             >
+              {' '}
               Reserve slot
             </Button>
-
-            <Button> Directions</Button>
+            {/* <Button
+              onClick={event => (window.location.href = '/spots/maps')}
+            ></Button> */}
+            <Link
+              to={
+                '/spots/maps/' +
+                this.state.longitude +
+                '/' +
+                this.state.latitude
+              }
+              class="button"
+              style={{ color: 'black ', marginLeft: '3mm' }}
+            >
+              Directions
+            </Link>
           </Paper>
           <br></br>
         </div>
@@ -95,7 +111,21 @@ export class Row extends Component {
               Unrserve slot
             </Button>
 
-            <Button> Directions</Button>
+            {/* <Button
+              onClick={event => (window.location.href = '/spots/maps')}
+            ></Button> */}
+            <Link
+              to={
+                '/spots/maps/' +
+                this.state.longitude +
+                '/' +
+                this.state.latitude
+              }
+              class="button"
+              style={{ color: 'black ', marginLeft: '3mm' }}
+            >
+              Directions
+            </Link>
           </Paper>
           <br></br>
         </div>

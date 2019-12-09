@@ -4,10 +4,6 @@ import { Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 export class home extends Component {
-  //   handleClick(e) {
-  //     console.log(+'ID : ' + e.target.id)
-  //   }
-
   render() {
     return (
       <div>
@@ -30,7 +26,7 @@ export class home extends Component {
                     >
                       <span>&nbsp;</span>
                     </a>
-                    <div className="main-menu hidden-md-down">
+                    {/* <div className="main-menu hidden-md-down">
                       <ul className="menu-list">
                         <li>
                           <a
@@ -42,10 +38,10 @@ export class home extends Component {
                           </a>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
 
-                  <div className="mobile-menu hidden-lg-up">
+                  {/* <div className="mobile-menu hidden-lg-up">
                     <ul className="mobile-menu-list">
                       <li>
                         <a
@@ -57,7 +53,7 @@ export class home extends Component {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               </nav>
             </header>

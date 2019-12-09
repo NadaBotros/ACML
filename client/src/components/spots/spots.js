@@ -103,11 +103,8 @@ export class spots extends Component {
   render() {
     const { classes } = this.props
     const { expanded } = this.state
-    console.log('All : ' + this.state.allSpots)
-    console.log('Empty : ' + this.state.emptySpots)
 
     if (this.state.checkedA == true) {
-      console.log('Checked True')
       return (
         <div className="hero-content">
           <FormGroup row>
@@ -123,8 +120,9 @@ export class spots extends Component {
               label="Empty spaces"
             />
             <Button className="btnstyle">
-              {' '}
-              <Link to="/">Home</Link>
+              <Link style={{ color: 'black', fontWeight: 'bold' }} to="/">
+                Home
+              </Link>
             </Button>
           </FormGroup>
           <div className={classes.root}>
@@ -142,8 +140,6 @@ export class spots extends Component {
         </div>
       )
     } else if (this.state.checkedA == false) {
-      console.log('Checked Flase')
-
       return (
         <div className="hero-content">
           <FormGroup row>
@@ -160,7 +156,9 @@ export class spots extends Component {
             />
             <Button className="btnstyle">
               {' '}
-              <Link to="/">Home</Link>
+              <Link style={{ color: 'black', fontWeight: 'bold' }} to="/">
+                Home
+              </Link>
             </Button>
           </FormGroup>
           <div className={classes.root}>
