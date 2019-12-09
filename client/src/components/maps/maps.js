@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
-import { Button, Link } from '@material-ui/core'
+import { Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 const mapStyles = {
   height: '100%',
