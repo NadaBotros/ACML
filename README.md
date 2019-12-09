@@ -34,3 +34,6 @@ docker run -p 5000:5000 gucparking //Run a command in a new container
 ## Docker-Compose
 
 docker-compose up //to link the backend with the frontend and run them together
+
+## Live-Demo
+http://acml-app.herokuapp.com/
