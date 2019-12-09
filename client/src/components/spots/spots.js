@@ -11,7 +11,7 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Row from './row.js'
-import Row2 from './row2.js'
+
 import background from '../../components/pictures/background.jpg'
 import './spots.css'
 import { display } from '@material-ui/system'
@@ -56,8 +56,6 @@ export class spots extends Component {
         parkingLot: this.state.key
       })
       .then(res => {
-        console.log('*** ' + res.data.emptySpots)
-
         this.setState({
           emptySpots: res.data.emptySpots,
           allSpots: res.data.allSpots
@@ -104,7 +102,6 @@ export class spots extends Component {
   render() {
     const { classes } = this.props
     const { expanded } = this.state
-    console.log('+++ ', this.props.match.params.key)
 
     if (this.state.checkedA == true) {
       return (
@@ -130,13 +127,13 @@ export class spots extends Component {
           <div className={classes.root}>
             {console.log('')}
             {this.state.emptySpots.map(element => (
-              <Row2
+              <Row
                 element={element}
                 id={element._id}
                 updateOccuipied={this.updateOccuipied}
                 componentDidMount={this.componentDidMount}
                 checkedA={this.state.checkedA}
-              ></Row2>
+              ></Row>
             ))}
           </div>
         </div>
@@ -165,13 +162,13 @@ export class spots extends Component {
           </FormGroup>
           <div className={classes.root}>
             {this.state.allSpots.map(element => (
-              <Row2
+              <Row
                 element={element}
                 id={element._id}
                 updateOccuipied={this.updateOccuipied}
                 componentDidMount={this.componentDidMount}
                 checkedA={this.state.checkedA}
-              ></Row2>
+              ></Row>
             ))}
           </div>
         </div>

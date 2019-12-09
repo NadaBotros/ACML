@@ -1,181 +1,137 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import { makeStyles } from '@material-ui/core/styles'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import Typography from '@material-ui/core/Typography'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import axios from 'axios'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import { Button, Link } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+
+import { Button } from '@material-ui/core'
 import './row.css'
-import { fontWeight } from '@material-ui/system'
-const count = 1
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import maps from '../maps/maps.js'
 
 const useStyles = makeStyles(theme => ({
-	root: {
-		width: '100%'
-	},
-	heading: {
-		fontSize: theme.typography.pxToRem(15),
-		flexBasis: '33.33%',
-		flexShrink: 0
-	},
-	secondaryHeading: {
-		fontSize: theme.typography.pxToRem(15),
-		color: theme.palette.text.secondary
-	},
-	expandedPanel: {
-		backgroundColor: 'red'
-	}
+  root: {
+    padding: theme.spacing(3, 2)
+  }
 }))
 
 export class Row extends Component {
-	state = {
-		expanded: null,
-		longitude: '',
-		latitude: '',
-		checkedA: true,
-		occupied: this.props.element.occupied,
-		object: []
-	}
+  state = {
+    occupied: this.props.element.occupied,
+    checkedA: this.props.checkedA,
+    longitude: this.props.element.longitude,
+    latitude: this.props.element.latitude
+  }
 
-	handleChange = panel => (event, expanded) => {
-		this.setState({
-			expanded: expanded ? panel : false
-		})
-	}
+  render() {
+    const styleRowUnReserved = {
+      color: 'red',
+      fontWeight: 'bold'
+    }
+    const styleRowReserved = {
+      color: 'green',
+      fontWeight: 'bold'
+    }
+    const styleCard = {
+      background: 'white'
+    }
 
-	handleChange2 = name => event => {
-		this.setState({ [name]: event.target.checked })
-	}
+    const { classes } = this.props
+    const { expanded } = this.state
+    if (this.state.occupied == false) {
+      return (
+        <div className="outerDiv">
+          <Paper className={classes.root} style={styleCard}>
+            <Typography variant="h5" component="h3" style={styleRowReserved}>
+              {this.props.element.name}
+            </Typography>
+            <Typography component="p">
+              {/* Spot occupied:{' '}
+                {'( ' +
+                  this.state.occupied +
+                  ' )' +
+                  '       ' +
+                  '\n' +  
+                  this.props.element._id} */}
+            </Typography>
+            <Button
+              onClick={() =>
+                this.props.updateOccuipied(
+                  this.props.element._id,
+                  !this.props.element.occupied
+                )
+              }
+            >
+              {' '}
+              Reserve slot
+            </Button>
+            {/* <Button
+              onClick={event => (window.location.href = '/spots/maps')}
+            ></Button> */}
+            <Link
+              to={
+                '/spots/maps/' +
+                this.state.longitude +
+                '/' +
+                this.state.latitude
+              }
+              class="button"
+              style={{ color: 'black ', marginLeft: '3mm' }}
+            >
+              Directions
+            </Link>
+          </Paper>
+          <br></br>
+        </div>
+      )
+    } else if (this.state.occupied == true) {
+      return (
+        <div className="outerDiv">
+          <Paper className={classes.root}>
+            <Typography variant="h5" component="h3" style={styleRowUnReserved}>
+              {this.props.element.name}
+            </Typography>
+            <Typography component="p">
+              {/* Spot occupied:{' '}
+                {'( ' +
+                  this.state.occupied +
+                  ' )' +
+                  '       ' +
+                  '\n' +
+                  this.props.element._id} */}
+            </Typography>
+            <Button
+              onClick={() =>
+                this.props.updateOccuipied(
+                  this.props.element._id,
+                  !this.props.element.occupied
+                )
+              }
+            >
+              Unrserve slot
+            </Button>
 
-	render() {
-		const styleRowUnReserved = {
-			color: 'red',
-			fontWeight: 'bold'
-		}
-		const styleRowReserved = {
-			color: 'green',
-			fontWeight: 'bold'
-		}
-		// console.log('NADDDDA')
-		// console.log(this.state.occupied)
-
-		const { classes } = this.props
-		const { expanded } = this.state
-		// console.log('============= ' + this.props.element._id)
-		if (this.state.occupied == false) {
-			return (
-				<div className='outerDiv'>
-					<ExpansionPanel
-						expanded={expanded === 'panel'}
-						onChange={this.handleChange('panel')}
-					>
-						<ExpansionPanelSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls='panel1bh-content'
-							id='panelbh-header'
-						>
-							<Typography className={classes.heading} style={styleRowReserved}>
-								{' '}
-								Spot
-							</Typography>
-						</ExpansionPanelSummary>
-						<ExpansionPanelDetails>
-							<Typography>
-								occupied:{' '}
-								{'( ' +
-									this.state.occupied +
-									' )' +
-									'       ' +
-									'\n' +
-									this.props.element._id}
-							</Typography>
-							<br></br>
-							<br></br>
-							<br></br>
-							<br></br>
-							<br></br>
-
-							<Button
-								onClick={() =>
-									this.props.updateOccuipied(
-										this.props.element._id,
-										!this.props.element.occupied
-									)
-								}
-							>
-								Reserve slot
-							</Button>
-
-							<Button onClick={event => (window.location.href = '/spots/maps')}>
-								{' '}
-								Directions
-							</Button>
-						</ExpansionPanelDetails>
-					</ExpansionPanel>
-				</div>
-			)
-		} else if (this.state.occupied == true) {
-			return (
-				<div className='outerDiv'>
-					<ExpansionPanel
-						expanded={expanded === 'panel'}
-						onChange={this.handleChange('panel')}
-					>
-						<ExpansionPanelSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls='panel1bh-content'
-							id='panelbh-header'
-						>
-							<Typography
-								className={classes.heading}
-								style={styleRowUnReserved}
-							>
-								Spot
-							</Typography>
-						</ExpansionPanelSummary>
-						<ExpansionPanelDetails>
-							<Typography>
-								occupied:{' '}
-								{'( ' +
-									this.state.occupied +
-									' )' +
-									'       ' +
-									'\n' +
-									this.props.element._id}
-							</Typography>
-							<br></br>
-							<br></br>
-							<br></br>
-							<br></br>
-							<br></br>
-
-							<Button
-								onClick={() =>
-									this.props.updateOccuipied(
-										this.props.element._id,
-										!this.props.element.occupied
-									)
-								}
-							>
-								Unreserve slot
-							</Button>
-
-							<Button onClick={event => (window.location.href = '/spots/maps')}>
-								{' '}
-								Directions
-							</Button>
-						</ExpansionPanelDetails>
-					</ExpansionPanel>
-				</div>
-			)
-		}
-	}
+            {/* <Button
+              onClick={event => (window.location.href = '/spots/maps')}
+            ></Button> */}
+            <Link
+              to={
+                '/spots/maps/' +
+                this.state.longitude +
+                '/' +
+                this.state.latitude
+              }
+              class="button"
+              style={{ color: 'black ', marginLeft: '3mm' }}
+            >
+              Directions
+            </Link>
+          </Paper>
+          <br></br>
+        </div>
+      )
+    }
+  }
 }
 
 export default withStyles(useStyles)(Row)
