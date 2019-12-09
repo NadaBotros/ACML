@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
+import {
+	GoogleApiWrapper,
+	Map,
+	Marker,
+	InfoWindow,
+	DirectionsRenderer
+} from 'google-maps-react'
 
 const mapStyles = {
 	height: '100%',
 	width: '100%'
 }
+
+const origin = { lat: 29.98511, lng: 31.442849 }
+const destination = { lat: 29.98531, lng: 31.440892 }
 
 const iconBase =
 	'https://developers.google.com/maps/documentation/javascript/examples/full/images/'
@@ -12,8 +21,8 @@ const iconBase =
 export class MapContainer extends Component {
 	constructor(props) {
 		super(props)
-
 		this.state = {
+			directionsService: new window.google.maps.DirectionsService(),
 			directions: null,
 			activeMarker: {}, //Shows the active marker upon click
 			selectedPlace: {},
@@ -51,7 +60,27 @@ export class MapContainer extends Component {
 				}
 			]
 		}
+		// const directionService = new window.google.maps.DirectionsService()
+		// directionService.route(
+		// 	{
+		// 		origin: origin,
+		// 		destination: destination,
+		// 		optimizeWaypoints: true,
+		// 		travelMode: window.google.maps.TravelMode.DRIVING
+		// 	},
+		// 	(result, status) => {
+		// 		console.log('status', status)
+		// 		if (status === window.google.maps.DirectionsStatus.OK) {
+		// 			this.setState({
+		// 				directions: result
+		// 			})
+		// 		} else {
+		// 			console.error(`error fetching directions ${result}`)
+		// 		}
+		// 	}
+		// )
 	}
+
 	onMarkerClick = (props, marker, e) =>
 		this.setState({
 			selectedPlace: props,
@@ -92,6 +121,19 @@ export class MapContainer extends Component {
 							<h4>{this.state.selectedPlace.name}</h4>
 						</div>
 					</InfoWindow>
+					<DirectionsRenderer
+						directions={this.state.directions}
+						options={{
+							polylineOptions: {
+								storkeColor: this.props.storkeColor,
+								strokeOpacity: 0.4,
+								strokeWeight: 4
+							},
+							preserveViewport: true,
+							suppressMarkers: true,
+							icon: { scale: 3 }
+						}}
+					/>
 				</div>
 			)
 		})
@@ -217,11 +259,12 @@ export class MapContainer extends Component {
 						<h4>{this.state.selectedPlace.name}</h4>
 					</div>
 				</InfoWindow>
+				{/* <DirectionsRenderer directions={this.state.directions} /> */}
 			</Map>
 		)
 	}
 }
 
 export default GoogleApiWrapper({
-	apiKey: 'AIzaSyAvdZ1GY0y2CvgLPA1Z6NsuDT9nHPgTaxY'
+	apiKey: 'AIzaSyCeeH70MSClXRxC57m680S1HuxJp8wzphs'
 })(MapContainer)
