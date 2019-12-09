@@ -6,14 +6,8 @@ import {
 	InfoWindow,
 	DirectionsRenderer
 } from 'google-maps-react'
-import { Button } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 
-const mapStyles = {
-	height: '100%',
-	width: '100%'
-}
-
+let result1 = {}
 const origin = { lat: 29.98511, lng: 31.442849 }
 const destination = { lat: 29.98531, lng: 31.440892 }
 
@@ -26,8 +20,7 @@ export class MapContainer extends Component {
 		const longitude = this.props.match.params.long
 		const latitude = this.props.match.params.lat
 		this.state = {
-			directionsService: new window.google.maps.DirectionsService(),
-			directions: null,
+			// directions: {},
 			activeMarker: {}, //Shows the active marker upon click
 			selectedPlace: {},
 			showingInfoWindow: false,
@@ -70,25 +63,6 @@ export class MapContainer extends Component {
 				}
 			]
 		}
-		// const directionService = new window.google.maps.DirectionsService()
-		// directionService.route(
-		// 	{
-		// 		origin: origin,
-		// 		destination: destination,
-		// 		optimizeWaypoints: true,
-		// 		travelMode: window.google.maps.TravelMode.DRIVING
-		// 	},
-		// 	(result, status) => {
-		// 		console.log('status', status)
-		// 		if (status === window.google.maps.DirectionsStatus.OK) {
-		// 			this.setState({
-		// 				directions: result
-		// 			})
-		// 		} else {
-		// 			console.error(`error fetching directions ${result}`)
-		// 		}
-		// 	}
-		// )
 	}
 
 	onMarkerClick = (props, marker, e) =>
@@ -246,12 +220,11 @@ export class MapContainer extends Component {
 						<h4>{this.state.selectedPlace.name}</h4>
 					</div>
 				</InfoWindow>
-				{/* <DirectionsRenderer directions={this.state.directions} /> */}
 			</Map>
 		)
 	}
 }
 
 export default GoogleApiWrapper({
-	apiKey: 'AIzaSyCeeH70MSClXRxC57m680S1HuxJp8wzphs'
+	apiKey: 'AIzaSyAvdZ1GY0y2CvgLPA1Z6NsuDT9nHPgTaxY'
 })(MapContainer)
