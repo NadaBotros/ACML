@@ -11,7 +11,7 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Row from './row.js'
-import Row2 from './row2.js'
+
 import background from '../../components/pictures/background.jpg'
 import './spots.css'
 import { display } from '@material-ui/system'
@@ -46,18 +46,16 @@ export class spots extends Component {
     allSpots: [],
     allAndEmptySpots: [],
     update: false,
-    id: ''
-    // key:
+    id: '',
+    key: this.props.match.params.key
   }
 
   componentDidMount() {
     axios
       .post('/api/spots/lotAllAndEmptySpots', {
-        parkingLot: this.props.match.params.key
+        parkingLot: this.state.key
       })
       .then(res => {
-        console.log('*** ' + res.data.emptySpots)
-
         this.setState({
           emptySpots: res.data.emptySpots,
           allSpots: res.data.allSpots
@@ -84,7 +82,7 @@ export class spots extends Component {
       })
       .then(async res => {
         const update = await axios.post('/api/spots/lotAllAndEmptySpots', {
-          parkingLot: localStorage.getItem('parking')
+          parkingLot: this.state.key
         })
         const s = update.data.allSpots
         const ss = update.data.emptySpots
@@ -129,13 +127,13 @@ export class spots extends Component {
           <div className={classes.root}>
             {console.log('')}
             {this.state.emptySpots.map(element => (
-              <Row2
+              <Row
                 element={element}
                 id={element._id}
                 updateOccuipied={this.updateOccuipied}
                 componentDidMount={this.componentDidMount}
                 checkedA={this.state.checkedA}
-              ></Row2>
+              ></Row>
             ))}
           </div>
         </div>
@@ -164,13 +162,13 @@ export class spots extends Component {
           </FormGroup>
           <div className={classes.root}>
             {this.state.allSpots.map(element => (
-              <Row2
+              <Row
                 element={element}
                 id={element._id}
                 updateOccuipied={this.updateOccuipied}
                 componentDidMount={this.componentDidMount}
                 checkedA={this.state.checkedA}
-              ></Row2>
+              ></Row>
             ))}
           </div>
         </div>
