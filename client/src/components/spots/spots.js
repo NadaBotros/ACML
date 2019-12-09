@@ -46,14 +46,14 @@ export class spots extends Component {
     allSpots: [],
     allAndEmptySpots: [],
     update: false,
-    id: ''
-    // key:
+    id: '',
+    key: this.props.match.params.key
   }
 
   componentDidMount() {
     axios
       .post('/api/spots/lotAllAndEmptySpots', {
-        parkingLot: this.props.match.params.key
+        parkingLot: this.state.key
       })
       .then(res => {
         console.log('*** ' + res.data.emptySpots)
@@ -84,7 +84,7 @@ export class spots extends Component {
       })
       .then(async res => {
         const update = await axios.post('/api/spots/lotAllAndEmptySpots', {
-          parkingLot: localStorage.getItem('parking')
+          parkingLot: this.state.key
         })
         const s = update.data.allSpots
         const ss = update.data.emptySpots
@@ -104,6 +104,7 @@ export class spots extends Component {
   render() {
     const { classes } = this.props
     const { expanded } = this.state
+    console.log('+++ ', this.props.match.params.key)
 
     if (this.state.checkedA == true) {
       return (
