@@ -47,12 +47,13 @@ export class spots extends Component {
     allAndEmptySpots: [],
     update: false,
     id: ''
+    // key:
   }
 
   componentDidMount() {
     axios
       .post('/api/spots/lotAllAndEmptySpots', {
-        parkingLot: localStorage.getItem('parking')
+        parkingLot: this.props.match.params.key
       })
       .then(res => {
         console.log('*** ' + res.data.emptySpots)

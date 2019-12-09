@@ -12,7 +12,7 @@ ReactDOM.render(
   <Router>
     <Switch>
       <Route exact path="/" component={home} />
-      <Route exact path="/spots" component={spots} />
+      <Route exact path="/spots/:key" component={spots} />
       <Route exact path="/spots/maps/:long/:lat" component={maps} />
     </Switch>
   </Router>,

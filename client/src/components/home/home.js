@@ -63,41 +63,41 @@ export class home extends Component {
                 <p>Reserve your parking spot</p>
                 <Link
                   id="P1"
-                  to="/spots"
+                  to="/spots/1"
                   className="hero-cta"
-                  onClick={localStorage.setItem('parking', 1)}
+                  // onClick={localStorage.setItem('parking', 1)}
                 >
                   P1
                 </Link>
                 <Link
                   id="P5"
-                  to="/spots"
+                  to="/spots/5"
                   className="hero-cta"
-                  onClick={localStorage.setItem('parking', 5)}
+                  // onClick={localStorage.setItem('parking', 5)}
                 >
                   P5
                 </Link>
                 <Link
                   id="P6"
-                  to="/spots"
+                  to="/spots/6"
                   className="hero-cta"
-                  onClick={localStorage.setItem('parking', 6)}
+                  // onClick={localStorage.setItem('parking', 6)}
                 >
                   P6
                 </Link>
                 <Link
                   id="p7"
-                  to="/spots"
+                  to="/spots/7"
                   class="hero-cta"
-                  onClick={localStorage.setItem('parking', 7)}
+                  // onClick={localStorage.setItem('parking', 7)}
                 >
                   P7
                 </Link>
                 <Link
                   id="p8"
-                  to="/spots"
+                  to="/spots/8"
                   class="hero-cta"
-                  onClick={localStorage.setItem('parking', 8)}
+                  // onClick={localStorage.setItem('parking', 8)}
                 >
                   P8
                 </Link>
