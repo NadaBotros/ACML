@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
+import {
+	GoogleApiWrapper,
+	Map,
+	Marker,
+	InfoWindow,
+	DirectionsRenderer
+} from 'google-maps-react'
 
-const mapStyles = {
-	height: '100%',
-	width: '100%'
-}
+let result1 = {}
+const origin = { lat: 29.98511, lng: 31.442849 }
+const destination = { lat: 29.98531, lng: 31.440892 }
 
 const iconBase =
 	'https://developers.google.com/maps/documentation/javascript/examples/full/images/'
@@ -12,9 +17,10 @@ const iconBase =
 export class MapContainer extends Component {
 	constructor(props) {
 		super(props)
-
+		const longitude = this.props.match.params.long
+		const latitude = this.props.match.params.lat
 		this.state = {
-			directions: null,
+			// directions: {},
 			activeMarker: {}, //Shows the active marker upon click
 			selectedPlace: {},
 			showingInfoWindow: false,
@@ -48,10 +54,17 @@ export class MapContainer extends Component {
 					content: 'P5',
 					//animation: google.maps.Animation.DROP,
 					icon: iconBase + 'parking_lot_maps.png'
+				},
+				{
+					coords: { lat: longitude, lng: latitude },
+					content: 'Spot'
+					//animation: google.maps.Animation.DROP,
+					// icon: iconBase + 'parking_lot_maps.png'
 				}
 			]
 		}
 	}
+
 	onMarkerClick = (props, marker, e) =>
 		this.setState({
 			selectedPlace: props,
@@ -66,37 +79,6 @@ export class MapContainer extends Component {
 			})
 		}
 	}
-
-	displayMarkers = () => {
-		return this.state.markers.map((store, index) => {
-			return (
-				<div>
-					<Marker
-						key={index}
-						id={index}
-						position={{
-							lat: store.coords.lat,
-							lng: store.coords.lng
-						}}
-						showingInfoWindow={true}
-						icon={store.icon}
-						onClick={this.onMarkerClick}
-						name={store.content}
-					/>
-					<InfoWindow
-						marker={this.state.activeMarker}
-						visible={this.state.showingInfoWindow}
-						onClose={this.onClose}
-					>
-						<div>
-							<h4>{this.state.selectedPlace.name}</h4>
-						</div>
-					</InfoWindow>
-				</div>
-			)
-		})
-	}
-
 	render() {
 		return (
 			<Map
@@ -207,6 +189,27 @@ export class MapContainer extends Component {
 					icon={this.state.markers[4].icon}
 					onClick={this.onMarkerClick}
 					name={this.state.markers[4].content}
+				/>
+				<InfoWindow
+					marker={this.state.activeMarker}
+					visible={this.state.showingInfoWindow}
+					onClose={this.onClose}
+				>
+					<div>
+						<h4>{this.state.selectedPlace.name}</h4>
+					</div>
+				</InfoWindow>
+				<Marker
+					key={6}
+					id={6}
+					position={{
+						lat: this.state.markers[5].coords.lat,
+						lng: this.state.markers[5].coords.lng
+					}}
+					showingInfoWindow={true}
+					//icon={this.state.markers[5].icon}
+					onClick={this.onMarkerClick}
+					name={this.state.markers[5].content}
 				/>
 				<InfoWindow
 					marker={this.state.activeMarker}

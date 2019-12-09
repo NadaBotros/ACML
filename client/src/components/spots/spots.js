@@ -11,9 +11,13 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Row from './row.js'
-import Row2 from './row2.js'
+
 import background from '../../components/pictures/background.jpg'
 import './spots.css'
+import { display } from '@material-ui/system'
+import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core'
+
 const count = 1
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,17 +46,16 @@ export class spots extends Component {
     allSpots: [],
     allAndEmptySpots: [],
     update: false,
-    id: ''
+    id: '',
+    key: this.props.match.params.key
   }
 
   componentDidMount() {
     axios
-      .post('http://localhost:5000/api/spots/lotAllAndEmptySpots', {
-        parkingLot: localStorage.getItem('parking')
+      .post('/api/spots/lotAllAndEmptySpots', {
+        parkingLot: this.state.key
       })
       .then(res => {
-        console.log('*** ' + res.data.emptySpots)
-
         this.setState({
           emptySpots: res.data.emptySpots,
           allSpots: res.data.allSpots
@@ -73,17 +76,14 @@ export class spots extends Component {
 
   updateOccuipied = (id, occupied) => {
     axios
-      .post('http://localhost:5000/api/spots/updateSpot', {
+      .post('/api/spots/updateSpot', {
         id: id,
         occupied: occupied
       })
       .then(async res => {
-        const update = await axios.post(
-          'http://localhost:5000/api/spots/lotAllAndEmptySpots',
-          {
-            parkingLot: localStorage.getItem('parking')
-          }
-        )
+        const update = await axios.post('/api/spots/lotAllAndEmptySpots', {
+          parkingLot: this.state.key
+        })
         const s = update.data.allSpots
         const ss = update.data.emptySpots
 
@@ -102,11 +102,8 @@ export class spots extends Component {
   render() {
     const { classes } = this.props
     const { expanded } = this.state
-    console.log('All : ' + this.state.allSpots)
-    console.log('Empty : ' + this.state.emptySpots)
 
     if (this.state.checkedA == true) {
-      console.log('Checked True')
       return (
         <div className="hero-content">
           <FormGroup row>
@@ -121,24 +118,27 @@ export class spots extends Component {
               }
               label="Empty spaces"
             />
+            <Button className="btnstyle">
+              <Link style={{ color: 'black', fontWeight: 'bold' }} to="/">
+                Home
+              </Link>
+            </Button>
           </FormGroup>
           <div className={classes.root}>
             {console.log('')}
             {this.state.emptySpots.map(element => (
-              <Row2
+              <Row
                 element={element}
                 id={element._id}
                 updateOccuipied={this.updateOccuipied}
                 componentDidMount={this.componentDidMount}
                 checkedA={this.state.checkedA}
-              ></Row2>
+              ></Row>
             ))}
           </div>
         </div>
       )
     } else if (this.state.checkedA == false) {
-      console.log('Checked Flase')
-
       return (
         <div className="hero-content">
           <FormGroup row>
@@ -153,16 +153,22 @@ export class spots extends Component {
               }
               label="Empty spaces"
             />
+            <Button className="btnstyle">
+              {' '}
+              <Link style={{ color: 'black', fontWeight: 'bold' }} to="/">
+                Home
+              </Link>
+            </Button>
           </FormGroup>
           <div className={classes.root}>
             {this.state.allSpots.map(element => (
-              <Row2
+              <Row
                 element={element}
                 id={element._id}
                 updateOccuipied={this.updateOccuipied}
                 componentDidMount={this.componentDidMount}
                 checkedA={this.state.checkedA}
-              ></Row2>
+              ></Row>
             ))}
           </div>
         </div>
